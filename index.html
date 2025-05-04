@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo Digital de Artefactos de Internet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+
+   <!-- Pantalla de bienvenida -->
+<div id="intro-screen">
+    <div class="intro-content">
+      <h1>Bienvenido</h1>
+      <button id="enter-button">Entrar</button>
+    </div>
+  </div>
+  
+    <!-- Cursor retro -->
+    <div class="retro-cursor"></div>
+<!-- Reproductor de audio oculto -->
+<audio id="bg-audio" autoplay loop>
+    <source src="scizzie - aquatic ambience.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+</audio>
+
+<!-- Botón para mutear/desmutear -->
+<button id="mute-btn" class="mute-button" onclick="toggleMute()">
+    🔊
+</button>
+
+    
+    <!-- Fondo estilo viejo CRT -->
+    <div class="crt-effect"></div>
+    
+    <!-- Efecto de escaneo -->
+    <div class="scanlines"></div>
+    
+    <!-- Cabecera con estilo Geocities -->
+    <header class="retro-header">
+        <div class="blinkies-container">
+            <img src="assets/images/blinkie1.gif" alt="Blinkie" class="blinkie">
+            <img src="assets/images/blinkie2.gif" alt="Blinkie" class="blinkie">
+        </div>
+        <h1 class="rainbow-text">★✧・ﾟMUSEO DIGITAL DE INTERNET・ﾟ✧★</h1>
+        <p class="marquee">
+            <span>✦ BIENVENID@S ✦ UNDER CONSTRUCTION ✦ ÚLTIMA ACTUALIZACIÓN: 12/25/1999 ✦ VISITANTE NÚMERO: <span id="visitor-counter">0000000</span> ✦</span>
+        </p>
+        <div class="under-construction">
+            <img src="assets/images/underconstruction.gif" alt="Under Construction">
+        </div>
+    </header>
+    
+    <!-- Navegación estilo web antigua -->
+    <nav class="retro-nav">
+        <ul>
+            <li><a href="#inicio" class="webring-link">🏠 INICIO</a></li>
+            <li><a href="#timeline" class="webring-link">⏳ LÍNEA DEL TIEMPO</a></li>
+            <li><a href="#exhibits" class="webring-link">🖼️ EXPOSICIONES</a></li>
+            <li><a href="#about" class="webring-link">❓ SOBRE EL PROYECTO</a></li>
+            <li><a href="#guestbook" class="webring-link">📝 LIBRO DE VISITAS</a></li>
+        </ul>
+        <div class="best-viewed">
+            <img src="assets/images/bestviewed.gif" alt="Best viewed with Netscape Navigator">
+        </div>
+    </nav>
+    
+    <main class="retro-main">
+        <!-- Sección de bienvenida -->
+        <section id="inicio" class="intro-section">
+            <div class="retro-terminal animate__animated animate__fadeIn">
+                <div class="terminal-header">
+                    <span class="btn red"></span>
+                    <span class="btn yellow"></span>
+                    <span class="btn green"></span>
+                    <span class="title">welcome.exe</span>
+                </div>
+                <div class="terminal-body">
+                    <p>> C:\> Iniciando Museo Digital de Internet...</p>
+                    <p>> Cargando recuerdos nostálgicos...</p>
+                    <p>> Bienvenid@ al viaje por la historia digital</p>
+                    <p>> Este sitio es mejor visto con Internet Explorer 5.0+</p>
+                    <p>> Resolución recomendada: 800x600</p>
+                    <p>> Presiona cualquier tecla para continuar...</p>
+                </div>
+            </div>
+            
+            <div class="web-1-0-banner">
+                <img src="assets/images/web10.gif" alt="Web 1.0">
+            </div>
+        </section>
+        
+        <!-- Línea de tiempo interactiva -->
+        <section id="timeline" class="timeline-section">
+            <h2 class="section-title rainbow-text">⏳ LÍNEA DEL TIEMPO DIGITAL</h2>
+              <!-- Botones de categoría -->
+  <div class="category-selector">
+    <button class="retro-btn category-btn active" data-category="all">🌐 Todo</button>
+    <button class="retro-btn category-btn" data-category="web-design">🎨 Diseño Web</button>
+    <button class="retro-btn category-btn" data-category="multimedia">📽️ Multimedia</button>
+    <button class="retro-btn category-btn" data-category="culture">👾 Cultura Digital</button>
+    <button class="retro-btn category-btn" data-category="transition">🔁 Web 1.0 → 2.0</button>
+    <button class="retro-btn category-btn" data-category="preservation">🗂️ Preservación</button>
+  </div>
+            <div class="decade-selector">
+                <button class="retro-btn" data-decade="1990">1990s</button>
+                <button class="retro-btn" data-decade="2000">2000s</button>
+                <button class="retro-btn" data-decade="2010">2010s</button>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div id="timeline-items" class="timeline-items">
+                    <!-- Los elementos se cargarán dinámicamente con JS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Exposiciones por temas -->
+        <section id="exhibits" class="exhibits-section">
+            <h2 class="section-title rainbow-text">🖼️ EXPOSICIONES TEMÁTICAS</h2>
+            
+            <div class="exhibit-tabs">
+                <button class="exhibit-tab active" data-tab="web-design">Diseño Web</button>
+                <button class="exhibit-tab" data-tab="multimedia">Multimedia</button>
+                <button class="exhibit-tab" data-tab="culture">Cultura Digital</button>
+                <button class="exhibit-tab" data-tab="transition">Web 1.0 → 2.0</button>
+                <button class="exhibit-tab" data-tab="preservation">Preservación</button>
+            </div>
+            
+            <div class="exhibit-content">
+                <div id="web-design" class="exhibit-pane active">
+                    <h3>✦ Evolución del Diseño Web ✦</h3>
+                    <div class="exhibit-grid">
+
+                        <div class="exhibit-item">
+                            <img src="assets/images/primerapaginaweb.jpg" alt="Primer sitio web" class="pixel-border">
+                            <h4>Primer sitio web</h4>
+                            <p>Tim Berners-Lee → Usaba HTML básico sin diseño.</p>
+                            <button class="retro-btn" onclick="showSimulation('cern')">Ver Simulación</button>
+                            </div>
+                        <div class="exhibit-item">
+                            <img src="assets/images/geocities.jpg" alt="GeoCities" class="pixel-border">
+                            <h4>GeoCities (1994)</h4>
+                            <p>El famoso servicio de hosting que organizaba sitios en "vecindarios" temáticos.</p>
+                            <button class="retro-btn" onclick="showSimulation('geocities')">Ver Simulación</button>
+                        </div>
+                        <div class="exhibit-item">
+                            <img src="assets/images/netscape.jpg" alt="Netscape" class="pixel-border">
+                            <h4>Netscape Navigator (1994)</h4>
+                            <p>El navegador que dominó los primeros años de la web.</p>
+                            <button class="retro-btn" onclick="showSimulation('netscape')">Ver Simulación</button>
+                        </div>
+                        <div class="exhibit-item">
+                            <img src="assets/images/tables.jpg" alt="Diseño con tablas" class="pixel-border">
+                            <h4>Diseño con Tablas</h4>
+                            <p>Antes de CSS, las tablas eran la única forma de maquetar páginas web.</p>
+                            <button class="retro-btn" onclick="showSimulation('tables')">Ver Simulación</button>
+                        </div>
+                        
+                    
+
+                    </div>
+                </div>
+                
+                <div id="multimedia" class="exhibit-pane">
+                    <h3>✦ Primeros Formatos Multimedia ✦</h3>
+                    <div class="exhibit-grid">
+                        <div class="exhibit-item">
+                            <img src="assets/images/animated-gif.gif" alt="GIF Animado" class="pixel-border">
+                            <h4>GIFs Animados</h4>
+                            <p>El formato que trajo animación a la web primitiva.</p>
+                            <button class="retro-btn" onclick="showGifGallery()">Ver Galería</button>
+                        </div>
+                        <div class="exhibit-item">
+                            <img src="assets/images/midi.png" alt="MIDI" class="pixel-border">
+                            <h4>Música MIDI</h4>
+                            <p>Las melodías electrónicas que acompañaban muchos sitios web.</p>
+                            <button class="retro-btn" onclick="showMidiPlayer()">Reproducir Muestras</button>
+                        </div>
+                        <div class="exhibit-item">
+                            <img src="assets/images/flash.jpg" alt="Flash" class="pixel-border">
+                            <h4>Adobe Flash</h4>
+                            <p>Revolucionó la web con animaciones e interactividad.</p>
+                            <button class="retro-btn" onclick="showSimulation('flash')">Ver Demostración</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Más paneles de exhibición... -->
+            </div>
+        </section>
+        
+        <!-- Libro de visitas retro -->
+        <section id="guestbook" class="guestbook-section">
+            <h2 class="section-title rainbow-text">📝 FIRMA MI LIBRO DE VISITAS</h2>
+            <div class="guestbook-form">
+                <div class="form-field">
+                    <label for="gb-name">Nombre:</label>
+                    <input type="text" id="gb-name" class="retro-input">
+                </div>
+                <div class="form-field">
+                    <label for="gb-email">Email:</label>
+                    <input type="text" id="gb-email" class="retro-input">
+                </div>
+                <div class="form-field">
+                    <label for="gb-message">Mensaje:</label>
+                    <textarea id="gb-message" class="retro-textarea" rows="5"></textarea>
+                </div>
+                <button class="retro-btn" onclick="submitGuestbook()">Enviar</button>
+            </div>
+            <div id="guestbook-entries" class="guestbook-entries">
+                <!-- Las entradas se cargarán aquí -->
+            </div>
+        </section>
+    </main>
+    
+    <footer class="retro-footer">
+        <div class="webring">
+            <p>🏆 Parte del <a href="#" class="webring-link">Webring Retro</a> 🏆</p>
+            <div class="webring-nav">
+                <a href="#" class="retro-btn">← Anterior</a>
+                <a href="#" class="retro-btn">Random</a>
+                <a href="#" class="retro-btn">Siguiente →</a>
+            </div>
+        </div>
+        <div class="footer-counter">
+            <img src="assets/images/counter.gif" alt="Contador de visitas">
+            <p>© 1999-2023 Museo Digital de Internet</p>
+        </div>
+    </footer>
+    
+    <!-- Reproductor MIDI oculto -->
+    <audio id="midi-player" src="assets/audio/midi-sample.mp3"></audio>
+    
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <script src="timeline.js"></script>
+    <script src="simulations.js"></script>
+</body>
+</html>

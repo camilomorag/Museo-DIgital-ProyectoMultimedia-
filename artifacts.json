@@ -1,0 +1,104 @@
+{
+    "artifacts": [
+        {
+            "id": 1,
+            "name": "GeoCities",
+            "year": 1994,
+            "description": "Servicio de alojamiento web que permitía a usuarios crear sus propias páginas con diseños coloridos y personalizados.",
+            "image": "assets/images/geocities.jpg",
+            "type": "website",
+            "details": "GeoCities fue fundado en 1994 por David Bohnett y John Rezner. Permitía a los usuarios crear sus propias páginas web gratuitas organizadas en 'vecindarios' temáticos como 'SiliconValley' para tecnología o 'Hollywood' para entretenimiento. En su apogeo, albergó millones de sitios personales con diseños coloridos, GIFs animados, contadores de visitas y libros de visitas. Fue adquirido por Yahoo! en 1999 por $3.57 mil millones y finalmente cerrado en 2009, aunque parte de su contenido fue preservado por el Archive Team.",
+            "category": "web-design"
+        },
+        {
+            "id": 2,
+            "name": "GIF Animado",
+            "year": 1987,
+            "description": "Formato de imagen que soporta animaciones, muy popular en los primeros años de la web.",
+            "image": "assets/images/animated-gif.gif",
+            "type": "media",
+            "details": "El formato GIF (Graphics Interchange Format) fue desarrollado por CompuServe en 1987. Aunque limitado a una paleta de 256 colores, su capacidad de animación mediante frames lo hizo extremadamente popular en los primeros sitios web. Los GIFs animados se usaban para banners de 'En construcción', botones parpadeantes, divisores decorativos y cualquier elemento que quisiera llamar la atención. Su popularidad resurgió en la década de 2010 como formato para memes y reacciones en redes sociales.",
+            "category": "multimedia"
+        },
+        {
+            "id": 3,
+            "name": "Netscape Navigator",
+            "year": 1994,
+            "description": "El navegador web que dominó los primeros años de Internet.",
+            "image": "assets/images/netscape.png",
+            "type": "software",
+            "details": "Netscape Navigator, lanzado en 1994, fue el navegador web dominante durante los primeros años de la web, llegando a tener más del 80% de cuota de mercado. Introdujo muchas características que hoy damos por sentado como cookies, JavaScript y soporte para frames. La 'Guerra de los Navegadores' con Internet Explorer de Microsoft llevó a prácticas anticompetitivas y eventualmente al declive de Netscape, aunque su código abierto se convirtió en la base de Mozilla Firefox.",
+            "category": "web-design"
+        },
+        {
+            "id": 4,
+            "name": "MIDI en la Web",
+            "year": 1995,
+            "description": "Archivos de música MIDI que reproducían melodías en páginas web personales.",
+            "image": "assets/images/midi.png",
+            "type": "media",
+            "details": "En los años 90, muchas páginas web personales incluían música MIDI de fondo. Estos archivos eran pequeños (ideal para conexiones lentas) y podían reproducirse con plugins o el soporte integrado en navegadores como Internet Explorer. Las melodías MIDI, aunque de calidad sintética, permitían a los webmasters añadir bandas sonoras a sus sitios, generalmente temas populares, música clásica o composiciones originales. El autoplay de audio MIDI sin consentimiento del usuario fue una de las primeras prácticas consideradas molestas en la web.",
+            "category": "multimedia"
+        },
+        {
+            "id": 5,
+            "name": "Adobe Flash",
+            "year": 1996,
+            "description": "Tecnología para crear contenido interactivo y animaciones en la web.",
+            "image": "assets/images/flash.jpg",
+            "type": "technology",
+            "details": "Originalmente desarrollado por Macromedia (luego adquirido por Adobe), Flash revolucionó la web permitiendo animaciones complejas, juegos y aplicaciones interactivas. En los 2000, era esencial para reproductores de video (YouTube lo usó inicialmente), banners publicitarios, sitios web completos y juegos en línea. Sin embargo, sus problemas de seguridad, alto consumo de recursos y falta de soporte en dispositivos móviles llevaron a su declive, siendo descontinuado oficialmente en 2020.",
+            "category": "multimedia"
+        },
+        {
+            "id": 6,
+            "name": "Webrings",
+            "year": 1995,
+            "description": "Anillos de sitios web sobre temas similares que se enlazaban entre sí.",
+            "image": "assets/images/webring.gif",
+            "type": "culture",
+            "details": "Los webrings eran colecciones de sitios web sobre un tema similar que se enlazaban entre sí en un anillo, permitiendo a los visitantes navegar de un sitio a otro. Fueron populares antes de los motores de búsqueda efectivos, ayudando a sitios pequeños a ganar visibilidad. Cada sitio mostraba un banner o enlace para ir al 'siguiente' o 'anterior' sitio en el anillo. Aunque hoy son raros, fueron un precursor importante de las comunidades en línea y el SEO.",
+            "category": "culture"
+        },
+        {
+            "id": 7,
+            "name": "Contadores de Visitas",
+            "year": 1995,
+            "description": "Gráficos que mostraban cuántas personas habían visitado una página web.",
+            "image": "assets/images/counter.gif",
+            "type": "website",
+            "details": "Los contadores de visitas eran omnipresentes en las páginas web de los 90, mostrando cuántas personas habían visitado el sitio. Inicialmente eran simples imágenes generadas por servidor que incrementaban un número, luego evolucionaron a servicios externos con diseños personalizados. Aunque hoy se consideran obsoletos (reemplazados por analíticas invisibles), eran una forma primitiva de validación social y orgullo para los webmasters amateur.",
+            "category": "web-design"
+        },
+        {
+            "id": 8,
+            "name": "Blogs Personales",
+            "year": 1999,
+            "description": "Páginas web donde personas compartían sus pensamientos y vida diaria.",
+            "image": "assets/images/blog.jpg",
+            "type": "culture",
+            "details": "Antes de las redes sociales, los blogs personales eran el principal medio para compartir pensamientos y experiencias en línea. Plataformas como LiveJournal (1999) y Blogger (1999) facilitaron su creación, aunque muchos eran hechos manualmente en HTML. Los blogs típicos incluían diarios personales, comentarios sobre tecnología o cultura, y listas de enlaces ('blogrolls'). Marcaron la transición de la Web 1.0 estática a la Web 2.0 participativa.",
+            "category": "culture"
+        },
+        {
+            "id": 9,
+            "name": "Tablas para Diseño",
+            "year": 1996,
+            "description": "Uso de tablas HTML para maquetar páginas web antes de CSS.",
+            "image": "assets/images/tables.jpg",
+            "type": "web-design",
+            "details": "Antes de que CSS fuera ampliamente soportado, los diseñadores web usaban tablas HTML complejas para controlar el diseño de las páginas. Las celdas de las tablas se usaban para posicionar menús, contenido y gráficos, a menudo con tablas anidadas dentro de otras tablas. Aunque permitían diseños más complejos que el HTML básico, resultaban en código difícil de mantener y páginas que no se adaptaban bien a diferentes tamaños de pantalla.",
+            "category": "web-design"
+        },
+        {
+            "id": 10,
+            "name": "Primeros Memes de Internet",
+            "year": 1996,
+            "description": "Contenido viral que se propagaba por correo electrónico y foros.",
+            "image": "assets/images/dancingbaby.gif",
+            "type": "culture",
+            "details": "Antes de las redes sociales, los memes de Internet se propagaban principalmente por correo electrónico y foros. Ejemplos tempranos incluyen el 'Dancing Baby' (1996), 'All Your Base Are Belong To Us' (2001) y 'The Hamster Dance' (1998). Estos memes eran generalmente más simples que los actuales, a menudo solo imágenes o GIFs con texto, pero establecieron patrones de cultura viral que continúan hoy.",
+            "category": "culture"
+        }
+    ]
+}

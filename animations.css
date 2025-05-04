@@ -1,0 +1,560 @@
+/* Animaciones específicas */
+@keyframes rainbow {
+    0% { color: #ff0000; }
+    14% { color: #ff7700; }
+    28% { color: #ffff00; }
+    42% { color: #00ff00; }
+    57% { color: #0000ff; }
+    71% { color: #4b0082; }
+    85% { color: #8f00ff; }
+    100% { color: #ff0000; }
+}
+
+.rainbow-text {
+    animation: rainbow 5s linear infinite;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Animaciones para la línea de tiempo */
+.timeline-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item.left {
+    margin-right: 50%;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.timeline-item.right {
+    margin-left: 50%;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.timeline-year {
+    background-color: #0f0;
+    color: #000;
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+}
+
+.timeline-image {
+    max-width: 200px;
+    border: 2px solid #f0f;
+    margin: 0.5rem 0;
+    image-rendering: pixelated;
+}
+
+/* Simulaciones */
+.simulation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.simulation-modal {
+    background-color: #000;
+    border: 3px solid #0f0;
+    padding: 1rem;
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+}
+
+.close-simulation {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Simulación de GeoCities */
+.geocities-simulation {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Comic Sans MS', cursive;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.geocities-header {
+    background-color: #006;
+    color: #ff0;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 3px solid #f0f;
+}
+
+.geocities-header img {
+    image-rendering: pixelated;
+    max-width: 200px;
+}
+
+.geocities-body {
+    display: flex;
+}
+
+.geocities-sidebar {
+    width: 120px;
+    background-color: #330066;
+    padding: 10px;
+    border-right: 2px dashed #ff0;
+}
+
+.geocities-sidebar img {
+    display: block;
+    margin: 10px auto;
+    image-rendering: pixelated;
+    max-width: 100%;
+}
+
+.geocities-content {
+    flex: 1;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+}
+
+.geocities-footer {
+    background-color: #006;
+    padding: 5px;
+    text-align: center;
+    border-top: 3px solid #f0f;
+}
+
+.geocities-footer img {
+    margin: 0 10px;
+    image-rendering: pixelated;
+    height: 30px;
+}
+
+/* Simulación de Netscape */
+.netscape-simulation {
+    background-color: #ccc;
+    color: #000;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.netscape-header {
+    background-color: #ccc;
+    padding: 5px;
+    border-bottom: 2px solid #999;
+    display: flex;
+    align-items: center;
+}
+
+.netscape-header img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.netscape-nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.netscape-nav button {
+    margin-right: 5px;
+    padding: 2px 5px;
+    background-color: #ccc;
+    border: 1px solid #999;
+}
+
+.netscape-nav input {
+    flex: 1;
+    margin: 0 5px;
+    padding: 2px;
+}
+
+.netscape-content {
+    flex: 1;
+    padding: 10px;
+    background-color: #fff;
+    overflow: auto;
+}
+
+.netscape-content img {
+    max-width: 100%;
+    border: 1px solid #ccc;
+}
+
+.netscape-status {
+    background-color: #ccc;
+    padding: 3px;
+    border-top: 2px solid #999;
+    font-size: 0.8rem;
+}
+
+/* Simulación de Flash */
+.flash-simulation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+.flash-loader {
+    text-align: center;
+    color: #fff;
+}
+
+.flash-loader img {
+    image-rendering: pixelated;
+    max-width: 100px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 20px;
+    background-color: #333;
+    margin: 20px auto;
+    border: 1px solid #666;
+}
+
+.progress {
+    height: 100%;
+    background-color: #0f0;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.flash-content {
+    text-align: center;
+    color: #fff;
+}
+
+.flash-animation {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.flash-shape {
+    width: 50px;
+    height: 50px;
+    margin: 0 10px;
+    background-color: #f0f;
+    animation: flashPulse 1s infinite alternate;
+}
+
+.flash-shape:nth-child(2) {
+    background-color: #0ff;
+    animation-delay: 0.3s;
+}
+
+.flash-shape:nth-child(3) {
+    background-color: #ff0;
+    animation-delay: 0.6s;
+}
+
+@keyframes flashPulse {
+    from { transform: scale(1); opacity: 0.5; }
+    to { transform: scale(1.2); opacity: 1; }
+}
+
+.enter-btn {
+    background-color: #f0f;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 20px;
+    animation: blink 1s infinite;
+}
+
+/* Galería de GIFs */
+.gif-gallery {
+    text-align: center;
+    color: #fff;
+}
+
+.gif-display {
+    max-width: 100%;
+    max-height: 60vh;
+    margin: 20px 0;
+    image-rendering: pixelated;
+    border: 2px solid #0f0;
+}
+
+.gif-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.gif-controls button {
+    background-color: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    padding: 5px 15px;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.gif-display-container {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.active-gif {
+    max-width: 100%;
+    max-height: 60vh;
+    border: 3px solid #f0f;
+    image-rendering: pixelated;
+}
+
+.gif-name {
+    color: #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.gif-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}/* animations.css - Añadir al final */
+/* Estilos para la biblioteca MIDI */
+.midi-library {
+    max-width: 800px;
+    background: linear-gradient(135deg, #000033, #000066);
+    color: #0f0;
+}
+
+.midi-playlist {
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+.midi-track {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 30, 0, 0.3);
+    border: 1px solid #0f0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.midi-track:hover {
+    background: rgba(0, 60, 0, 0.5);
+    transform: translateX(5px);
+}
+
+.track-cover {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #f0f;
+}
+
+.track-info {
+    flex: 1;
+}
+
+.track-info h4 {
+    margin: 0;
+    color: #0ff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+}
+
+.track-info p {
+    margin: 0.5rem 0 0;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.play-btn {
+    background: #0f0;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Estilos para el reproductor individual */
+.midi-player {
+    max-width: 600px;
+    background: linear-gradient(135deg, #000033, #220044);
+}
+
+.player-container {
+    display: flex;
+    padding: 1rem;
+}
+
+.cover-art {
+    position: relative;
+    width: 200px;
+    margin-right: 2rem;
+}
+
+.cover-art img {
+    width: 100%;
+    border: 3px solid #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.vinyl {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    background: #111;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 10px solid #333;
+    z-index: 1;
+    animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.track-details {
+    flex: 1;
+    color: #0f0;
+}
+
+.track-details h3 {
+    margin-top: 0;
+    border-bottom: 1px dashed #0f0;
+    padding-bottom: 0.5rem;
+}
+
+.highlight {
+    color: #ff0;
+    font-weight: bold;
+}
+
+.player-controls {
+    margin-top: 2rem;
+}
+
+.progress-container {
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #333;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    background: #0f0;
+    width: 0%;
+    transition: width 0.1s;
+}
+
+.time {
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    color: #0f0;
+}
+
+.time:first-child {
+    float: left;
+}
+
+.time:last-child {
+    float: right;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    clear: both;
+}
+
+.control-btn {
+    background: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background: #0f0;
+    color: #000;
+}
+
+.play-btn {
+    width: 60px;
+    background: #0f0;
+    color: #000;
+    font-weight: bold;
+}
