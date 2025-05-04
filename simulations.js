@@ -255,13 +255,14 @@ function showGifGallery() {
 
 // simulations.js - Actualización para el reproductor MIDI avanzado
 // simulations.js - Reproductor MP3 mejorado
+// simulations.js - Reproductor MP3 mejorado
+// simulations.js - Reproductor MP3 con tiempo dinámico
 const audioLibrary = [
     {
         title: "Tema de Geocities",
         file: "assets/audio/The X-Files Theme [HQoRXhS7vlU].mp3",
         cover: "assets/images/audio-covers/geocities.jpg",
         description: "Música típica de páginas Geocities (1996)",
-        duration: "2:45",
         source: "Páginas personales de Geocities"
     },
     {
@@ -269,7 +270,6 @@ const audioLibrary = [
         file: "assets/audio/netscape.mp3",
         cover: "assets/images/audio-covers/netscape.jpg",
         description: "Tema de instalación de Netscape (1997)",
-        duration: "1:58",
         source: "Netscape Communicator 4.0"
     },
     {
@@ -277,12 +277,10 @@ const audioLibrary = [
         file: "assets/audio/win98.mp3",
         cover: "assets/images/audio-covers/win98.jpg",
         description: "Recordado tema de inicio de Windows 98",
-        duration: "3:12",
         source: "Microsoft Windows 98"
     }
 ];
 
-// Mostrar la biblioteca de audio
 function showAudioPlayer() {
     const overlay = document.createElement('div');
     overlay.className = 'simulation-overlay';
@@ -299,7 +297,7 @@ function showAudioPlayer() {
                     <div class="track-info">
                         <h4>${track.title}</h4>
                         <p>${track.description}</p>
-                        <span class="duration">${track.duration}</span>
+                        <span class="duration">--:--</span>
                     </div>
                     <button class="retro-btn play-btn" onclick="openAudioPlayer(${index})">▶ Reproducir</button>
                 </div>
@@ -312,7 +310,6 @@ function showAudioPlayer() {
     document.body.appendChild(overlay);
 }
 
-// Reproductor individual de audio
 function openAudioPlayer(trackIndex) {
     const track = audioLibrary[trackIndex];
     const overlay = document.createElement('div');
@@ -340,7 +337,7 @@ function openAudioPlayer(trackIndex) {
                         </div>
                         <div class="time-display">
                             <span id="current-time">0:00</span>
-                            <span id="total-time">${track.duration}</span>
+                            <span id="remaining-time">-0:00</span>
                         </div>
                     </div>
                     <div class="buttons">
@@ -355,23 +352,45 @@ function openAudioPlayer(trackIndex) {
     
     const audio = modal.querySelector('#audio-track');
     const progress = modal.querySelector('#audio-progress');
-    const currentTime = modal.querySelector('#current-time');
+    const currentTimeEl = modal.querySelector('#current-time');
+    const remainingTimeEl = modal.querySelector('#remaining-time');
     const playPauseBtn = modal.querySelector('.play-pause-btn');
     
-    // Actualizar barra de progreso
-    audio.ontimeupdate = () => {
-        const percent = (audio.currentTime / audio.duration) * 100;
+    // Detectar duración automáticamente
+    audio.onloadedmetadata = function() {
+        // Actualizar duración en la biblioteca
+        const duration = formatTime(audio.duration);
+        document.querySelectorAll('.duration')[trackIndex].textContent = duration;
+        
+        // Configurar tiempo restante inicial
+        remainingTimeEl.textContent = `-${duration}`;
+    };
+    
+    // Actualizar progreso y tiempos
+    audio.ontimeupdate = function() {
+        const currentTime = audio.currentTime;
+        const duration = audio.duration;
+        
+        // Barra de progreso
+        const percent = (currentTime / duration) * 100;
         progress.style.width = `${percent}%`;
-        currentTime.textContent = formatTime(audio.currentTime);
+        
+        // Tiempo transcurrido (izquierda)
+        currentTimeEl.textContent = formatTime(currentTime);
+        
+        // Tiempo restante (derecha, negativo)
+        const remaining = duration - currentTime;
+        remainingTimeEl.textContent = `-${formatTime(remaining)}`;
     };
     
     // Cuando termina la canción
-    audio.onended = () => {
+    audio.onended = function() {
         playPauseBtn.textContent = "▶";
+        document.querySelector('.vinyl').style.animationPlayState = 'paused';
     };
     
-    // Cerrar al hacer clic en X
-    modal.querySelector('.close-simulation').onclick = () => {
+    // Cerrar reproductor
+    modal.querySelector('.close-simulation').onclick = function() {
         audio.pause();
         overlay.remove();
     };
@@ -382,9 +401,12 @@ function openAudioPlayer(trackIndex) {
     // Funciones globales de control
     window.togglePlayPause = function() {
         if (audio.paused) {
-            audio.play();
-            playPauseBtn.textContent = "⏸";
-            document.querySelector('.vinyl').style.animationPlayState = 'running';
+            audio.play()
+                .then(() => {
+                    playPauseBtn.textContent = "⏸";
+                    document.querySelector('.vinyl').style.animationPlayState = 'running';
+                })
+                .catch(e => console.error("Error al reproducir:", e));
         } else {
             audio.pause();
             playPauseBtn.textContent = "▶";
@@ -400,16 +422,14 @@ function openAudioPlayer(trackIndex) {
         audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
     };
     
-    // Reproducir automáticamente al abrir
+    // Intenta reproducir automáticamente (puede ser bloqueado por el navegador)
     audio.play().then(() => {
         playPauseBtn.textContent = "⏸";
     }).catch(e => {
-        console.log("Error al reproducir:", e);
-        playPauseBtn.textContent = "▶";
+        console.log("Autoplay bloqueado:", e);
     });
 }
 
-// Formatear tiempo (segundos a MM:SS)
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);

@@ -558,3 +558,252 @@
     color: #000;
     font-weight: bold;
 }
+
+/* Estilos para el reproductor de audio */
+.audio-library {
+    max-width: 800px;
+    background: linear-gradient(135deg, #000033, #220044);
+    color: #0f0;
+    border: 3px solid #f0f;
+}
+
+.audio-playlist {
+    max-height: 70vh;
+    overflow-y: auto;
+    margin-top: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #0f0 #000;
+}
+
+.audio-playlist::-webkit-scrollbar {
+    width: 8px;
+}
+
+.audio-playlist::-webkit-scrollbar-track {
+    background: #000;
+}
+
+.audio-playlist::-webkit-scrollbar-thumb {
+    background-color: #0f0;
+    border-radius: 4px;
+}
+
+.audio-track {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 30, 0, 0.3);
+    border: 1px solid #0f0;
+    transition: all 0.3s;
+}
+
+.audio-track:hover {
+    background: rgba(0, 60, 0, 0.5);
+    transform: translateX(5px);
+}
+
+.track-cover {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #f0f;
+}
+
+.track-info {
+    flex: 1;
+}
+
+.track-info h4 {
+    margin: 0;
+    color: #0ff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+}
+
+.track-info p {
+    margin: 0.5rem 0 0;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.duration {
+    color: #0f0;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+}
+
+/* Estilos para el reproductor individual */
+.audio-player {
+    max-width: 600px;
+    background: linear-gradient(135deg, #000033, #330066);
+    border: 3px solid #0ff;
+}
+
+.player-container {
+    display: flex;
+    padding: 1rem;
+}
+
+.cover-art {
+    position: relative;
+    width: 200px;
+    margin-right: 2rem;
+}
+
+.cover-art img {
+    width: 100%;
+    border: 3px solid #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.vinyl {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    background: #111;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 10px solid #333;
+    z-index: 1;
+    animation: spin 4s linear infinite;
+}
+
+.vinyl-blue {
+    border-color: #0066ff;
+    box-shadow: 0 0 10px #0066ff;
+}
+
+.vinyl-purple {
+    border-color: #9900ff;
+    box-shadow: 0 0 10px #9900ff;
+}
+
+@keyframes spin {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.track-details {
+    flex: 1;
+    color: #0f0;
+}
+
+.track-details h3 {
+    margin-top: 0;
+    border-bottom: 1px dashed #0f0;
+    padding-bottom: 0.5rem;
+}
+
+.source {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.source span {
+    color: #ff0;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+}
+
+.player-controls {
+    margin-top: 2rem;
+}
+
+.progress-container {
+    margin: 1rem 0;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #333;
+    margin-bottom: 0.5rem;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(to right, #0f0, #0ff);
+    width: 0%;
+    transition: width 0.1s;
+}
+
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    color: #0f0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.control-btn {
+    background: #000;
+    color: #0f0;
+    border: 2px solid #0f0;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: #0f0;
+    color: #000;
+    transform: scale(1.1);
+}
+
+.play-pause-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    background: #0f0;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Efecto de pulsación */
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+/* Modifica el time-display en animations.css */
+.time-display {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'VT323', monospace;
+    font-size: 1.3rem;
+    color: #0f0;
+    margin-top: 0.5rem;
+}
+
+.time-display span {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+#current-time {
+    color: #0ff; /* Color diferente para el tiempo transcurrido */
+}
+
+#remaining-time {
+    color: #f0f; /* Color diferente para el tiempo restante */
+}
