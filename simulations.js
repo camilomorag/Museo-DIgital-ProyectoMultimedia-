@@ -257,27 +257,74 @@ function showGifGallery() {
 // simulations.js - Reproductor MP3 mejorado
 // simulations.js - Reproductor MP3 mejorado
 // simulations.js - Reproductor MP3 con tiempo dinámico
+// simulations.js - Reproductor de playlist completo
+// simulations.js - Reproductor avanzado con carátulas individuales
 const audioLibrary = [
     {
-        title: "Tema de Geocities",
-        file: "assets/audio/The X-Files Theme [HQoRXhS7vlU].mp3",
-        cover: "assets/images/audio-covers/geocities.jpg",
-        description: "Música típica de páginas Geocities (1996)",
-        source: "Páginas personales de Geocities"
+        id: "win98",
+        title: "Windows 98 Soundtrack",
+        year: "1998",
+        source: "Microsoft Corporation",
+        songs: [
+            {
+                title: "Windows 98 Startup",
+                file: "assets/audio/Windows 98 Sound_ Notify [PMSRkHPttek].mp3",
+                cover: "assets/images/covers/win98_startup.jpg",
+                description: "El icónico sonido de inicio de Windows 98",
+                duration: "0:45"
+            },
+            {
+                title: "Error Sound",
+                file: "assets/audio/Microsoft Windows 98 Error - Sound Effect (HD) [9sycZ4GnUA4].mp3",
+                cover: "assets/images/covers/win98_error.jpg",
+                description: "Sonido de error clásico",
+                duration: "0:03"
+            },
+            {
+                title: "System Exit",
+                file: "assets/audio/Windows 98 Exit Windows Sound Effect [iXffx7tq7qU].mp3",
+                cover: "assets/images/covers/win98_exit.jpg",
+                description: "Melodía de cierre del sistema",
+                duration: "0:30"
+            },
+            {
+                title: "Notify",
+                file: "assets/audio/Windows 98 Sound_ Notify [PMSRkHPttek].mp3",
+                cover: "assets/images/covers/win98_exit.jpg",
+                description: "Un pling suave que aparecía en muchas acciones.",
+                duration: "0:30"
+            },
+            {
+                title: "Welcome Windows 98",
+                file: "assets/audio/Windows 98 Welcome Music [mTf806u38Ng].mp3",
+                cover: "assets/images/covers/win98_exit.jpg",
+                description: "Una melodía relajante de fondo en la pantalla de bienvenida.",
+                duration: "0:30"
+            },
+            
+        ]
     },
     {
-        title: "Netscape Navigator",
-        file: "assets/audio/netscape.mp3",
-        cover: "assets/images/audio-covers/netscape.jpg",
-        description: "Tema de instalación de Netscape (1997)",
-        source: "Netscape Communicator 4.0"
-    },
-    {
-        title: "Windows 98 Startup",
-        file: "assets/audio/win98.mp3",
-        cover: "assets/images/audio-covers/win98.jpg",
-        description: "Recordado tema de inicio de Windows 98",
-        source: "Microsoft Windows 98"
+        id: "geocities",
+        title: "GeoCities MIDI Collection",
+        year: "1996-1999",
+        source: "Various Geocities Pages",
+        songs: [
+            {
+                title: "Welcome MIDI",
+                file: "assets/audio/geocities_welcome.mid",
+                cover: "assets/images/covers/geocities_welcome.jpg",
+                description: "Melodía típica de bienvenida",
+                duration: "2:15"
+            },
+            {
+                title: "Under Construction",
+                file: "assets/audio/geocities_construction.mid",
+                cover: "assets/images/covers/geocities_construction.jpg",
+                description: "Tema musical para páginas en construcción",
+                duration: "1:45"
+            }
+        ]
     }
 ];
 
@@ -290,16 +337,14 @@ function showAudioPlayer() {
     modal.innerHTML = `
         <button class="close-simulation">✕</button>
         <h3 class="rainbow-text">♫ Biblioteca de Audio Retro ♫</h3>
-        <div class="audio-playlist">
-            ${audioLibrary.map((track, index) => `
-                <div class="audio-track" data-index="${index}">
-                    <img src="${track.cover}" class="track-cover">
-                    <div class="track-info">
-                        <h4>${track.title}</h4>
-                        <p>${track.description}</p>
-                        <span class="duration">--:--</span>
+        <div class="collections-grid">
+            ${audioLibrary.map(collection => `
+                <div class="collection-card" onclick="openCollection('${collection.id}')">
+                    <img src="${collection.songs[0].cover}" class="collection-thumbnail">
+                    <div class="collection-info">
+                        <h4>${collection.title}</h4>
+                        <p>${collection.songs.length} canciones • ${collection.year}</p>
                     </div>
-                    <button class="retro-btn play-btn" onclick="openAudioPlayer(${index})">▶ Reproducir</button>
                 </div>
             `).join('')}
         </div>
@@ -310,37 +355,83 @@ function showAudioPlayer() {
     document.body.appendChild(overlay);
 }
 
-function openAudioPlayer(trackIndex) {
-    const track = audioLibrary[trackIndex];
+function openCollection(collectionId) {
+    const collection = audioLibrary.find(c => c.id === collectionId);
     const overlay = document.createElement('div');
     overlay.className = 'simulation-overlay';
     
     const modal = document.createElement('div');
-    modal.className = 'simulation-modal audio-player';
+    modal.className = 'simulation-modal song-library';
     modal.innerHTML = `
         <button class="close-simulation">✕</button>
-        <div class="player-container">
-            <div class="cover-art">
-                <img src="${track.cover}" alt="${track.title}">
-                <div class="vinyl ${trackIndex % 2 === 0 ? 'vinyl-blue' : 'vinyl-purple'}"></div>
+        <div class="collection-header">
+            <h3 class="rainbow-text">${collection.title}</h3>
+            <p class="collection-meta">${collection.year} • ${collection.source}</p>
+        </div>
+        
+        <div class="songs-list">
+            ${collection.songs.map((song, index) => `
+                <div class="song-card" data-index="${index}">
+                    <img src="${song.cover}" class="song-cover">
+                    <div class="song-details">
+                        <h4>${song.title}</h4>
+                        <p>${song.description}</p>
+                        <div class="song-meta">
+                            <span class="song-duration">${song.duration}</span>
+                            <button class="retro-btn play-btn" onclick="playSong('${collectionId}', ${index})">▶ Reproducir</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+}
+
+function playSong(collectionId, songIndex) {
+    const collection = audioLibrary.find(c => c.id === collectionId);
+    const song = collection.songs[songIndex];
+    
+    // Cerrar cualquier reproductor existente
+    const existingPlayer = document.querySelector('.song-player-overlay');
+    if (existingPlayer) existingPlayer.remove();
+    
+    // Crear el reproductor
+    const overlay = document.createElement('div');
+    overlay.className = 'simulation-overlay song-player-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'simulation-modal song-player';
+    modal.innerHTML = `
+        <button class="close-simulation">✕</button>
+        <div class="player-content">
+            <div class="song-cover-art">
+                <img src="${song.cover}" alt="${song.title}">
+                <div class="vinyl-record"></div>
             </div>
-            <div class="track-details">
-                <h3 class="rainbow-text">${track.title}</h3>
-                <p>${track.description}</p>
-                <p class="source">Fuente: <span>${track.source}</span></p>
+            
+            <div class="song-info">
+                <h3 class="rainbow-text">${song.title}</h3>
+                <p class="song-description">${song.description}</p>
+                <p class="song-collection">De: ${collection.title} (${collection.year})</p>
                 
                 <div class="player-controls">
-                    <audio id="audio-track" src="${track.file}"></audio>
+                    <audio id="audio-player" src="${song.file}"></audio>
+                    
                     <div class="progress-container">
                         <div class="progress-bar">
-                            <div class="progress" id="audio-progress"></div>
+                            <div class="progress-fill" id="progress-fill"></div>
                         </div>
                         <div class="time-display">
                             <span id="current-time">0:00</span>
-                            <span id="remaining-time">-0:00</span>
+                            <span id="remaining-time">-${song.duration}</span>
                         </div>
                     </div>
-                    <div class="buttons">
+                    
+                    <div class="control-buttons">
                         <button class="control-btn" onclick="skipBackward()">⏪ 10s</button>
                         <button class="control-btn play-pause-btn" onclick="togglePlayPause()">▶</button>
                         <button class="control-btn" onclick="skipForward()">⏩ 10s</button>
@@ -350,53 +441,39 @@ function openAudioPlayer(trackIndex) {
         </div>
     `;
     
-    const audio = modal.querySelector('#audio-track');
-    const progress = modal.querySelector('#audio-progress');
+    const audio = modal.querySelector('#audio-player');
+    const progressFill = modal.querySelector('#progress-fill');
     const currentTimeEl = modal.querySelector('#current-time');
     const remainingTimeEl = modal.querySelector('#remaining-time');
     const playPauseBtn = modal.querySelector('.play-pause-btn');
     
-    // Detectar duración automáticamente
+    // Configurar eventos de audio
     audio.onloadedmetadata = function() {
-        // Actualizar duración en la biblioteca
+        // Actualizar duración total (por si es diferente al metadata)
         const duration = formatTime(audio.duration);
-        document.querySelectorAll('.duration')[trackIndex].textContent = duration;
-        
-        // Configurar tiempo restante inicial
         remainingTimeEl.textContent = `-${duration}`;
     };
     
-    // Actualizar progreso y tiempos
     audio.ontimeupdate = function() {
-        const currentTime = audio.currentTime;
-        const duration = audio.duration;
+        // Actualizar barra de progreso
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${percent}%`;
         
-        // Barra de progreso
-        const percent = (currentTime / duration) * 100;
-        progress.style.width = `${percent}%`;
-        
-        // Tiempo transcurrido (izquierda)
-        currentTimeEl.textContent = formatTime(currentTime);
-        
-        // Tiempo restante (derecha, negativo)
-        const remaining = duration - currentTime;
-        remainingTimeEl.textContent = `-${formatTime(remaining)}`;
+        // Actualizar tiempos
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        remainingTimeEl.textContent = `-${formatTime(audio.duration - audio.currentTime)}`;
     };
     
-    // Cuando termina la canción
     audio.onended = function() {
         playPauseBtn.textContent = "▶";
-        document.querySelector('.vinyl').style.animationPlayState = 'paused';
+        document.querySelector('.vinyl-record').style.animationPlayState = 'paused';
     };
     
-    // Cerrar reproductor
+    // Configurar botón de cierre
     modal.querySelector('.close-simulation').onclick = function() {
         audio.pause();
         overlay.remove();
     };
-    
-    overlay.appendChild(modal);
-    document.body.appendChild(overlay);
     
     // Funciones globales de control
     window.togglePlayPause = function() {
@@ -404,13 +481,13 @@ function openAudioPlayer(trackIndex) {
             audio.play()
                 .then(() => {
                     playPauseBtn.textContent = "⏸";
-                    document.querySelector('.vinyl').style.animationPlayState = 'running';
+                    document.querySelector('.vinyl-record').style.animationPlayState = 'running';
                 })
                 .catch(e => console.error("Error al reproducir:", e));
         } else {
             audio.pause();
             playPauseBtn.textContent = "▶";
-            document.querySelector('.vinyl').style.animationPlayState = 'paused';
+            document.querySelector('.vinyl-record').style.animationPlayState = 'paused';
         }
     };
     
@@ -422,12 +499,15 @@ function openAudioPlayer(trackIndex) {
         audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
     };
     
-    // Intenta reproducir automáticamente (puede ser bloqueado por el navegador)
+    // Reproducir automáticamente al abrir
     audio.play().then(() => {
         playPauseBtn.textContent = "⏸";
     }).catch(e => {
         console.log("Autoplay bloqueado:", e);
     });
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
 }
 
 function formatTime(seconds) {
