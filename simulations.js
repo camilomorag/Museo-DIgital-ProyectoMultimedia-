@@ -259,6 +259,8 @@ function showGifGallery() {
 // simulations.js - Reproductor MP3 con tiempo dinámico
 // simulations.js - Reproductor de playlist completo
 // simulations.js - Reproductor avanzado con carátulas individuales
+// simulations.js - Versión actualizada con soporte para videos
+
 const audioLibrary = [
     {
         id: "win98",
@@ -266,42 +268,52 @@ const audioLibrary = [
         year: "1998",
         source: "Microsoft Corporation",
         songs: [
-            {
+             {
                 title: "Windows 98 Startup",
                 file: "assets/audio/Windows 98 Sound_ Notify [PMSRkHPttek].mp3",
-                cover: "assets/images/covers/win98_startup.jpg",
+                cover: "assets/covers/Windows 98 Startup.jpg",
                 description: "El icónico sonido de inicio de Windows 98",
                 duration: "0:45"
             },
             {
                 title: "Error Sound",
                 file: "assets/audio/Microsoft Windows 98 Error - Sound Effect (HD) [9sycZ4GnUA4].mp3",
-                cover: "assets/images/covers/win98_error.jpg",
+                cover: "assets/covers/error.jpg",
                 description: "Sonido de error clásico",
                 duration: "0:03"
             },
             {
                 title: "System Exit",
                 file: "assets/audio/Windows 98 Exit Windows Sound Effect [iXffx7tq7qU].mp3",
-                cover: "assets/images/covers/win98_exit.jpg",
+                cover: "assets/covers/system exit.jpg",
                 description: "Melodía de cierre del sistema",
                 duration: "0:30"
             },
             {
                 title: "Notify",
                 file: "assets/audio/Windows 98 Sound_ Notify [PMSRkHPttek].mp3",
-                cover: "assets/images/covers/win98_exit.jpg",
+                cover: "assets/covers/notify.jpg",
                 description: "Un pling suave que aparecía en muchas acciones.",
                 duration: "0:30"
             },
             {
                 title: "Welcome Windows 98",
                 file: "assets/audio/Windows 98 Welcome Music [mTf806u38Ng].mp3",
-                cover: "assets/images/covers/win98_exit.jpg",
+                cover: "assets/covers/inicio.jpg",
                 description: "Una melodía relajante de fondo en la pantalla de bienvenida.",
                 duration: "0:30"
             },
-            
+        
+            // ... más canciones ...
+        ],
+        videos: [
+            {
+                title: "Windows 98 Commercial",
+                file: "assets/videos/win98-commercial.mp4",
+                thumbnail: "assets/covers/win98-commercial-thumb.jpg",
+                description: "Anuncio original de lanzamiento de Windows 98",
+                duration: "0:30"
+            }
         ]
     },
     {
@@ -312,114 +324,99 @@ const audioLibrary = [
         songs: [
             {
                 title: "Welcome MIDI",
-                file: "assets/audio/geocities_welcome.mid",
-                cover: "assets/images/covers/geocities_welcome.jpg",
+                file: "assets/audio/8-bit Ipanema song (from 90's Geocities Website) [_7_dmj5Woh0].mp3",
+                cover: "assets/covers/genocities.jpg",
                 description: "Melodía típica de bienvenida",
                 duration: "2:15"
+            }
+        ],
+        videos: [
+            {
+                title: "Tour por GeoCities",
+                file: "assets/videos/geocities-tour.mp4",
+                thumbnail: "assets/covers/geocities-tour-thumb.jpg",
+                description: "Recorrido por sitios clásicos de GeoCities",
+                duration: "1:45"
+            }
+        ]
+    },
+    {
+        id: "netscape",
+        title: "Netscape Navigator",
+        year: "1994-2008",
+        source: "Netscape Communications",
+        songs: [
+            {
+                title: "Netscape Theme",
+                file: "assets/audio/netscape-theme.mp3",
+                cover: "assets/covers/nestcape_musciCover.jpg",
+                description: "Tema musical de Netscape Navigator",
+                duration: "1:30"
+            }
+        ],
+        videos: [
+            {
+                title: "Netscape Comercial",
+                file: "assets/videos/Netscape - Navigator - Internet Browser Commercial Search Engine (2000) (480p).mp4",
+                thumbnail: "assets/videos/nesstcapecover.jpg.png",
+                description: "Netscape Navigator Internet Browser Commercial Search Engine (2000)",
+                duration: "2:00"
             },
             {
-                title: "Under Construction",
-                file: "assets/audio/geocities_construction.mid",
-                cover: "assets/images/covers/geocities_construction.jpg",
-                description: "Tema musical para páginas en construcción",
-                duration: "1:45"
+                title: "Netscape Navigator",
+                file: "assets/videos/Apple Macintosh - Netscape Navigator 1.0N (1994) Netscape (720p).mp4",
+                thumbnail: "/assets/videos/Apple Macintosh - Netscape Navigator 1.0N (1994) Netscape.jpg",
+                description: " Netscape Navigator 1.0N (1994) Netscape",
+                duration: "2:00"
             }
         ]
     }
 ];
 
-function showAudioPlayer() {
-    const overlay = document.createElement('div');
-    overlay.className = 'simulation-overlay';
-    
-    const modal = document.createElement('div');
-    modal.className = 'simulation-modal audio-library';
-    modal.innerHTML = `
-        <button class="close-simulation">✕</button>
-        <h3 class="rainbow-text">♫ Biblioteca de Audio Retro ♫</h3>
-        <div class="collections-grid">
-            ${audioLibrary.map(collection => `
-                <div class="collection-card" onclick="openCollection('${collection.id}')">
-                    <img src="${collection.songs[0].cover}" class="collection-thumbnail">
-                    <div class="collection-info">
-                        <h4>${collection.title}</h4>
-                        <p>${collection.songs.length} canciones • ${collection.year}</p>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
-    
-    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
-    overlay.appendChild(modal);
-    document.body.appendChild(overlay);
-}
-
-function openCollection(collectionId) {
+// Función para mostrar el reproductor multimedia
+function showMediaPlayer(collectionId, mediaType, mediaIndex = 0) {
     const collection = audioLibrary.find(c => c.id === collectionId);
-    const overlay = document.createElement('div');
-    overlay.className = 'simulation-overlay';
-    
-    const modal = document.createElement('div');
-    modal.className = 'simulation-modal song-library';
-    modal.innerHTML = `
-        <button class="close-simulation">✕</button>
-        <div class="collection-header">
-            <h3 class="rainbow-text">${collection.title}</h3>
-            <p class="collection-meta">${collection.year} • ${collection.source}</p>
-        </div>
-        
-        <div class="songs-list">
-            ${collection.songs.map((song, index) => `
-                <div class="song-card" data-index="${index}">
-                    <img src="${song.cover}" class="song-cover">
-                    <div class="song-details">
-                        <h4>${song.title}</h4>
-                        <p>${song.description}</p>
-                        <div class="song-meta">
-                            <span class="song-duration">${song.duration}</span>
-                            <button class="retro-btn play-btn" onclick="playSong('${collectionId}', ${index})">▶ Reproducir</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('')}
-        </div>
-    `;
-    
-    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
-    overlay.appendChild(modal);
-    document.body.appendChild(overlay);
-}
+    if (!collection) return;
 
-function playSong(collectionId, songIndex) {
-    const collection = audioLibrary.find(c => c.id === collectionId);
-    const song = collection.songs[songIndex];
+    // Determinar qué tipo de media mostrar
+    const mediaItems = mediaType === 'video' ? (collection.videos || []) : (collection.songs || []);
+    if (mediaItems.length === 0) {
+        alert(`No hay ${mediaType === 'video' ? 'videos' : 'canciones'} disponibles para esta colección.`);
+        return;
+    }
+
+    const mediaItem = mediaItems[mediaIndex];
     
     // Cerrar cualquier reproductor existente
-    const existingPlayer = document.querySelector('.song-player-overlay');
+    const existingPlayer = document.querySelector('.media-player-overlay');
     if (existingPlayer) existingPlayer.remove();
     
     // Crear el reproductor
     const overlay = document.createElement('div');
-    overlay.className = 'simulation-overlay song-player-overlay';
+    overlay.className = 'simulation-overlay media-player-overlay';
     
     const modal = document.createElement('div');
-    modal.className = 'simulation-modal song-player';
+    modal.className = 'simulation-modal media-player';
     modal.innerHTML = `
         <button class="close-simulation">✕</button>
         <div class="player-content">
-            <div class="song-cover-art">
-                <img src="${song.cover}" alt="${song.title}">
+            <div class="media-cover-art">
+                ${mediaType === 'audio' ? `
+                <img src="${mediaItem.cover}" alt="${mediaItem.title}">
                 <div class="vinyl-record"></div>
+                ` : `
+                <video id="media-element" src="${mediaItem.file}" poster="${mediaItem.thumbnail}" controls></video>
+                `}
             </div>
             
-            <div class="song-info">
-                <h3 class="rainbow-text">${song.title}</h3>
-                <p class="song-description">${song.description}</p>
-                <p class="song-collection">De: ${collection.title} (${collection.year})</p>
+            <div class="media-info">
+                <h3 class="rainbow-text">${mediaItem.title}</h3>
+                <p class="media-description">${mediaItem.description}</p>
+                <p class="media-collection">De: ${collection.title} (${collection.year})</p>
                 
+                ${mediaType === 'audio' ? `
                 <div class="player-controls">
-                    <audio id="audio-player" src="${song.file}"></audio>
+                    <audio id="media-element" src="${mediaItem.file}"></audio>
                     
                     <div class="progress-container">
                         <div class="progress-bar">
@@ -427,7 +424,7 @@ function playSong(collectionId, songIndex) {
                         </div>
                         <div class="time-display">
                             <span id="current-time">0:00</span>
-                            <span id="remaining-time">-${song.duration}</span>
+                            <span id="remaining-time">-${mediaItem.duration}</span>
                         </div>
                     </div>
                     
@@ -437,79 +434,255 @@ function playSong(collectionId, songIndex) {
                         <button class="control-btn" onclick="skipForward()">⏩ 10s</button>
                     </div>
                 </div>
+                ` : ''}
             </div>
+        </div>
+        
+        <!-- Navegación entre elementos multimedia -->
+        <div class="media-navigation">
+            ${mediaType === 'audio' ? `
+            <button class="retro-btn" onclick="showMediaList('${collectionId}', 'audio')">🎵 Ver todas las canciones</button>
+            ${collection.videos?.length > 0 ? `<button class="retro-btn" onclick="showMediaList('${collectionId}', 'video')">🎥 Ver videos</button>` : ''}
+            ` : `
+            <button class="retro-btn" onclick="showMediaList('${collectionId}', 'video')">🎥 Ver todos los videos</button>
+            ${collection.songs?.length > 0 ? `<button class="retro-btn" onclick="showMediaList('${collectionId}', 'audio')">🎵 Ver canciones</button>` : ''}
+            `}
         </div>
     `;
     
-    const audio = modal.querySelector('#audio-player');
+    const mediaElement = modal.querySelector('#media-element');
     const progressFill = modal.querySelector('#progress-fill');
     const currentTimeEl = modal.querySelector('#current-time');
     const remainingTimeEl = modal.querySelector('#remaining-time');
     const playPauseBtn = modal.querySelector('.play-pause-btn');
     
-    // Configurar eventos de audio
-    audio.onloadedmetadata = function() {
-        // Actualizar duración total (por si es diferente al metadata)
-        const duration = formatTime(audio.duration);
-        remainingTimeEl.textContent = `-${duration}`;
-    };
-    
-    audio.ontimeupdate = function() {
-        // Actualizar barra de progreso
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progressFill.style.width = `${percent}%`;
+    if (mediaType === 'audio') {
+        // Configurar eventos de audio
+        mediaElement.onloadedmetadata = function() {
+            const duration = formatTime(mediaElement.duration);
+            remainingTimeEl.textContent = `-${duration}`;
+        };
         
-        // Actualizar tiempos
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-        remainingTimeEl.textContent = `-${formatTime(audio.duration - audio.currentTime)}`;
-    };
-    
-    audio.onended = function() {
-        playPauseBtn.textContent = "▶";
-        document.querySelector('.vinyl-record').style.animationPlayState = 'paused';
-    };
+        mediaElement.ontimeupdate = function() {
+            const percent = (mediaElement.currentTime / mediaElement.duration) * 100;
+            progressFill.style.width = `${percent}%`;
+            
+            currentTimeEl.textContent = formatTime(mediaElement.currentTime);
+            remainingTimeEl.textContent = `-${formatTime(mediaElement.duration - mediaElement.currentTime)}`;
+        };
+        
+        mediaElement.onended = function() {
+            if (playPauseBtn) playPauseBtn.textContent = "▶";
+            const vinyl = modal.querySelector('.vinyl-record');
+            if (vinyl) vinyl.style.animationPlayState = 'paused';
+        };
+    }
     
     // Configurar botón de cierre
     modal.querySelector('.close-simulation').onclick = function() {
-        audio.pause();
+        if (mediaElement) mediaElement.pause();
         overlay.remove();
     };
     
-    // Funciones globales de control
-    window.togglePlayPause = function() {
-        if (audio.paused) {
-            audio.play()
-                .then(() => {
-                    playPauseBtn.textContent = "⏸";
-                    document.querySelector('.vinyl-record').style.animationPlayState = 'running';
-                })
-                .catch(e => console.error("Error al reproducir:", e));
-        } else {
-            audio.pause();
-            playPauseBtn.textContent = "▶";
-            document.querySelector('.vinyl-record').style.animationPlayState = 'paused';
-        }
-    };
-    
-    window.skipBackward = function() {
-        audio.currentTime = Math.max(0, audio.currentTime - 10);
-    };
-    
-    window.skipForward = function() {
-        audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
-    };
-    
-    // Reproducir automáticamente al abrir
-    audio.play().then(() => {
-        playPauseBtn.textContent = "⏸";
-    }).catch(e => {
-        console.log("Autoplay bloqueado:", e);
-    });
+    // Funciones globales de control para audio
+    if (mediaType === 'audio') {
+        window.togglePlayPause = function() {
+            if (mediaElement.paused) {
+                mediaElement.play()
+                    .then(() => {
+                        playPauseBtn.textContent = "⏸";
+                        const vinyl = document.querySelector('.vinyl-record');
+                        if (vinyl) vinyl.style.animationPlayState = 'running';
+                    })
+                    .catch(e => console.error("Error al reproducir:", e));
+            } else {
+                mediaElement.pause();
+                playPauseBtn.textContent = "▶";
+                const vinyl = document.querySelector('.vinyl-record');
+                if (vinyl) vinyl.style.animationPlayState = 'paused';
+            }
+        };
+        
+        window.skipBackward = function() {
+            mediaElement.currentTime = Math.max(0, mediaElement.currentTime - 10);
+        };
+        
+        window.skipForward = function() {
+            mediaElement.currentTime = Math.min(mediaElement.duration, mediaElement.currentTime + 10);
+        };
+        
+        // Reproducir automáticamente al abrir (solo audio)
+        mediaElement.play().then(() => {
+            if (playPauseBtn) playPauseBtn.textContent = "⏸";
+        }).catch(e => {
+            console.log("Autoplay bloqueado:", e);
+        });
+    }
     
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
 }
 
+// Función para mostrar la lista de medios (audio/video)
+function showMediaList(collectionId, mediaType) {
+    const collection = audioLibrary.find(c => c.id === collectionId);
+    if (!collection) return;
+
+    const mediaItems = mediaType === 'video' ? (collection.videos || []) : (collection.songs || []);
+    if (mediaItems.length === 0) {
+        alert(`No hay ${mediaType === 'video' ? 'videos' : 'canciones'} disponibles para esta colección.`);
+        return;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.className = 'simulation-overlay media-list-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'simulation-modal media-library';
+    modal.innerHTML = `
+        <button class="close-simulation">✕</button>
+        <div class="collection-header">
+            <h3 class="rainbow-text">${collection.title}</h3>
+            <p class="collection-meta">${collection.year} • ${collection.source}</p>
+            <h4>${mediaType === 'video' ? '🎥 Videos disponibles' : '🎵 Canciones disponibles'}</h4>
+            
+            <!-- Selector de tipo de medio -->
+            <div class="media-type-selector">
+                <button class="retro-btn ${mediaType === 'audio' ? 'active' : ''}" onclick="showMediaList('${collectionId}', 'audio')">🎵 Canciones (${collection.songs?.length || 0})</button>
+                <button class="retro-btn ${mediaType === 'video' ? 'active' : ''}" onclick="showMediaList('${collectionId}', 'video')">🎥 Videos (${collection.videos?.length || 0})</button>
+            </div>
+        </div>
+        
+        <div class="media-items-list">
+            ${mediaItems.map((item, index) => `
+                <div class="media-item" data-index="${index}">
+                    ${mediaType === 'audio' ? `
+                    <img src="${item.cover}" class="media-thumbnail">
+                    ` : `
+                    <video class="media-thumbnail" poster="${item.thumbnail}" muted loop>
+                        <source src="${item.file}" type="video/mp4">
+                    </video>
+                    `}
+                    <div class="media-details">
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                        <div class="media-meta">
+                            <span class="media-duration">${item.duration}</span>
+                            <button class="retro-btn play-btn" onclick="showMediaPlayer('${collectionId}', '${mediaType}', ${index})">
+                                ${mediaType === 'audio' ? '▶ Reproducir' : '🎥 Ver video'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    // Configurar hover para videos (reproducir en miniatura)
+    if (mediaType === 'video') {
+        const videoThumbnails = modal.querySelectorAll('.media-thumbnail');
+        videoThumbnails.forEach(video => {
+            video.addEventListener('mouseenter', () => video.play());
+            video.addEventListener('mouseleave', () => {
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+    }
+}
+
+// Función para mostrar el selector de colecciones (actualizada)
+function showAudioPlayer() {
+    const overlay = document.createElement('div');
+    overlay.className = 'simulation-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'simulation-modal audio-library';
+    modal.innerHTML = `
+        <button class="close-simulation">✕</button>
+        <h3 class="rainbow-text">📻 Biblioteca Multimedia Retro 📻</h3>
+        <div class="collections-grid">
+            ${audioLibrary.map(collection => `
+                <div class="collection-card" onclick="openCollection('${collection.id}')">
+                    <img src="${collection.songs?.[0]?.cover || collection.videos?.[0]?.thumbnail || 'assets/covers/default.jpg'}" class="collection-thumbnail">
+                    <div class="collection-info">
+                        <h4>${collection.title}</h4>
+                        <p>${collection.year}</p>
+                        <div class="collection-stats">
+                            ${collection.songs?.length > 0 ? `<span>🎵 ${collection.songs.length}</span>` : ''}
+                            ${collection.videos?.length > 0 ? `<span>🎥 ${collection.videos.length}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+}
+
+// Función para abrir una colección (actualizada)
+function openCollection(collectionId) {
+    const collection = audioLibrary.find(c => c.id === collectionId);
+    const overlay = document.createElement('div');
+    overlay.className = 'simulation-overlay collection-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'simulation-modal song-library';
+    modal.innerHTML = `
+        <button class="close-simulation">✕</button>
+        <div class="collection-header">
+            <img src="${collection.songs?.[0]?.cover || collection.videos?.[0]?.thumbnail || 'assets/covers/default.jpg'}" class="collection-large-cover">
+            <div class="collection-details">
+                <h3 class="rainbow-text">${collection.title}</h3>
+                <p class="collection-description">${collection.source} (${collection.year})</p>
+                
+                <div class="collection-buttons">
+                    ${collection.songs?.length > 0 ? `
+                    <button class="retro-btn" onclick="showMediaList('${collection.id}', 'audio')">
+                        🎵 Ver canciones (${collection.songs.length})
+                    </button>
+                    ` : ''}
+                    
+                    ${collection.videos?.length > 0 ? `
+                    <button class="retro-btn" onclick="showMediaList('${collection.id}', 'video')">
+                        🎥 Ver videos (${collection.videos.length})
+                    </button>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+        
+        <div class="collection-content">
+            <h4>✦ Descripción ✦</h4>
+            <p class="collection-full-description">
+                ${getCollectionDescription(collectionId)}
+            </p>
+        </div>
+    `;
+    
+    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+}
+
+// Función auxiliar para obtener descripción de la colección
+function getCollectionDescription(collectionId) {
+    const descriptions = {
+        "win98": "Colección de sonidos y música del sistema operativo Windows 98, incluyendo sonidos de sistema, melodías de inicio y cierre, y más.",
+        "geocities": "Música MIDI típica que se encontraba en las páginas de GeoCities, el famoso servicio de hosting de los 90s.",
+        "netscape": "Sonidos y música relacionados con Netscape Navigator, el navegador web dominante en los primeros años de Internet."
+    };
+    return descriptions[collectionId] || "Colección multimedia histórica de Internet.";
+}
+
+// Función para formatear el tiempo
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);

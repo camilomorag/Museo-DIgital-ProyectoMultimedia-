@@ -1268,3 +1268,147 @@
     background: #0f0;
     color: #000;
 }
+
+/* Estilos para el reproductor multimedia */
+.media-player {
+    max-width: 800px;
+    background: linear-gradient(135deg, #000033, #220044);
+    border: 3px solid #0ff;
+}
+
+.media-cover-art {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1.5rem;
+}
+
+.media-cover-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.media-cover-art video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 3px solid #f0f;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+}
+
+.media-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.media-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #0f0;
+}
+
+/* Estilos para la lista de medios */
+.media-library {
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.media-type-selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.media-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.media-item {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 30, 0, 0.3);
+    border: 1px solid #0f0;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.media-item:hover {
+    background: rgba(0, 60, 0, 0.4);
+    transform: translateX(5px);
+}
+
+.media-thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-right: 2px solid #0f0;
+}
+
+.media-details {
+    flex: 1;
+    padding: 0.8rem;
+}
+
+.media-details h4 {
+    margin: 0 0 0.5rem;
+    color: #0f0;
+    font-size: 1.1rem;
+}
+
+.media-details p {
+    margin: 0;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.media-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.8rem;
+}
+
+.media-duration {
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    color: #f0f;
+}
+
+/* Estilos para las tarjetas de colección */
+.collection-stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+}
+
+.collection-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.collection-content {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed #0f0;
+}
+
+.collection-full-description {
+    color: #ccc;
+    line-height: 1.6;
+}
