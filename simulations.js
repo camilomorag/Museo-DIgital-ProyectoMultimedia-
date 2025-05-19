@@ -309,9 +309,16 @@ const audioLibrary = [
         videos: [
             {
                 title: "Windows 98 Commercial",
-                file: "assets/videos/win98-commercial.mp4",
-                thumbnail: "assets/covers/win98-commercial-thumb.jpg",
+                file: "assets/videos/Windows 98 Commercial (240p).mp4",
+                thumbnail: "assets/videos/covers videos/windows 98.jpg",
                 description: "Anuncio original de lanzamiento de Windows 98",
+                duration: "0:30"
+            },
+            {
+                title: "Windows 98 Startup",
+                file: "assets/videos/Windows 98 Startup (480p).mp4",
+                thumbnail: "assets/videos/covers videos/windows 98 starup.jpg",
+                description: "Demostracion Windows 98 startup",
                 duration: "0:30"
             }
         ]
@@ -358,14 +365,14 @@ const audioLibrary = [
             {
                 title: "Netscape Comercial",
                 file: "assets/videos/Netscape - Navigator - Internet Browser Commercial Search Engine (2000) (480p).mp4",
-                thumbnail: "assets/videos/nesstcapecover.jpg.png",
+                thumbnail: "assets/videos/covers videos/nesstcapecover.jpg.png",
                 description: "Netscape Navigator Internet Browser Commercial Search Engine (2000)",
                 duration: "2:00"
             },
             {
                 title: "Netscape Navigator",
                 file: "assets/videos/Apple Macintosh - Netscape Navigator 1.0N (1994) Netscape (720p).mp4",
-                thumbnail: "/assets/videos/Apple Macintosh - Netscape Navigator 1.0N (1994) Netscape.jpg",
+                thumbnail: "/assets/videos/covers videos/Apple Macintosh - Netscape Navigator 1.0N (1994) Netscape.jpg",
                 description: " Netscape Navigator 1.0N (1994) Netscape",
                 duration: "2:00"
             }
