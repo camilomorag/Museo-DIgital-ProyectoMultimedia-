@@ -320,7 +320,16 @@ const audioLibrary = [
                 thumbnail: "assets/videos/covers videos/windows 98 starup.jpg",
                 description: "Demostracion Windows 98 startup",
                 duration: "0:30"
-            }
+            },
+            {
+                title: "Windows 98 Games",
+                file: "assets/videos/Windows98 GAMEPLAY- Clásicos de PC (720p).mp4",
+                thumbnail: "assets/videos/covers videos/windows games.jpg",
+                description: "Juegos de Windows 98",
+                duration: "0:30"
+            },
+            
+            
         ]
     },
     {
@@ -338,13 +347,36 @@ const audioLibrary = [
             }
         ],
         videos: [
+
+              {
+                title: "Navegar por Geocities",
+                file: "assets/videos/Geocities (480p).mp4",
+                thumbnail: "assets/videos/covers videos/geocities 1.jpg",
+                description: "Como se entraba al Geocities por internet",
+                duration: "1:45"
+            },
             {
                 title: "Tour por GeoCities",
-                file: "assets/videos/geocities-tour.mp4",
-                thumbnail: "assets/covers/geocities-tour-thumb.jpg",
+                file: "assets/videos/Exploring GeoCities - Part 1 - The Early World Wide Web (720p).mp4",
+                thumbnail: "assets/videos/covers videos/geocities 2.jpg",
                 description: "Recorrido por sitios clásicos de GeoCities",
                 duration: "1:45"
-            }
+            },
+               {
+                title: "Como era subir un sitio a Geocities",
+                file: "assets/videos/Como subir una web a geocities (360p).mp4",
+                thumbnail: "assets/videos/covers videos/geocities 3.jpg",
+                description: "Demostracion de lo que era subir un sitio a Geocities",
+                duration: "1:45"
+            },
+            
+            {
+                title: "Como era crear un sitio para Geocities",
+                file: "assets/videos/¿Cómo Crear Tu Propia Web visit my web mx.geocities.com web_de_informacion thanks u (720p).mp4",
+                thumbnail: "assets/videos/covers videos/geocities 4.jpg",
+                description: "Demostracion de como era la creacion de una pagina en Geocities",
+                duration: "1:45"
+            },
         ]
     },
     {
@@ -375,10 +407,18 @@ const audioLibrary = [
                 thumbnail: "/assets/videos/covers videos/Apple Macintosh - Netscape Navigator 1.0N (1994) Netscape.jpg",
                 description: " Netscape Navigator 1.0N (1994) Netscape",
                 duration: "2:00"
+            },
+              {
+                title: "Netscape navengando 2022",
+                file: "assets/videos/Navegando con Netscape Navigator 9 en 2022 (720p).mp4",
+                thumbnail: "/assets/videos/covers videos/nestcape 1.pg.jpg",
+                description: " Netscape Navigator 1.0N (1994) Netscape",
+                duration: "2:00"
             }
         ]
     }
 ];
+
 
 // Función para mostrar el reproductor multimedia
 function showMediaPlayer(collectionId, mediaType, mediaIndex = 0) {
@@ -574,6 +614,7 @@ function showMediaList(collectionId, mediaType) {
                         <h4>${item.title}</h4>
                         <p>${item.description}</p>
                         <div class="media-meta">
+                        
                             <span class="media-duration">${item.duration}</span>
                             <button class="retro-btn play-btn" onclick="showMediaPlayer('${collectionId}', '${mediaType}', ${index})">
                                 ${mediaType === 'audio' ? '▶ Reproducir' : '🎥 Ver video'}
@@ -700,4 +741,106 @@ function playMidi() {
     const player = document.getElementById('midi-player');
     player.play();
     alert('♫ Reproduciendo muestra MIDI de los 90s...');
+}
+
+
+// Agregar esto al final de simulations.js
+
+// Función para mostrar los shorts
+function showShortsPlayer() {
+    const shorts = [
+        {
+            title: "Windows 98 Commercial",
+            youtubeId: "H5JfSSL8w34",
+            description: "Anuncio original de Windows 98"
+        },
+        {
+            title: "GeoCities Tour",
+            youtubeId: "yr921L6Sxpk",
+            description: "Recorrido por GeoCities en su época dorada"
+        },
+        {
+            title: "Netscape Navigator",
+            youtubeId: "uFvHURTRJX0",
+            description: "Demostración de Netscape Navigator"
+        },
+        {
+            title: "Web 1.0 Experience",
+            youtubeId: "Wl2LkzIkacI",
+            description: "Cómo era navegar en los 90s"
+        }
+    ];
+
+    const overlay = document.createElement('div');
+    overlay.className = 'simulation-overlay shorts-overlay';
+    
+    const modal = document.createElement('div');
+    modal.className = 'simulation-modal shorts-player';
+    modal.innerHTML = `
+        <button class="close-simulation">X</button>
+        <h3 class="rainbow-text">✦ YouTube Shorts Retro ✦</h3>
+        <div class="shorts-container">
+            <iframe id="shorts-iframe" src="https://www.youtube.com/embed/${shorts[0].youtubeId}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="shorts-info">
+                <h4>${shorts[0].title}</h4>
+                <p>${shorts[0].description}</p>
+            </div>
+        </div>
+        <div class="shorts-controls">
+            <button class="retro-btn" onclick="prevShort()">◀ Anterior</button>
+            <button class="retro-btn" onclick="nextShort()">Siguiente ▶</button>
+        </div>
+    `;
+    
+    // Variables globales para controlar los shorts
+    window.currentShortIndex = 0;
+    window.shortsList = shorts;
+    
+    window.prevShort = function() {
+        currentShortIndex = (currentShortIndex - 1 + shortsList.length) % shortsList.length;
+        updateShortDisplay();
+    };
+    
+    window.nextShort = function() {
+        currentShortIndex = (currentShortIndex + 1) % shortsList.length;
+        updateShortDisplay();
+    };
+    
+    function updateShortDisplay() {
+        const iframe = modal.querySelector('#shorts-iframe');
+        const info = modal.querySelector('.shorts-info');
+        iframe.src = `https://www.youtube.com/embed/${shortsList[currentShortIndex].youtubeId}?autoplay=1&mute=1`;
+        info.innerHTML = `
+            <h4>${shortsList[currentShortIndex].title}</h4>
+            <p>${shortsList[currentShortIndex].description}</p>
+        `;
+    }
+    
+    // Configurar botón de cierre
+    modal.querySelector('.close-simulation').onclick = () => overlay.remove();
+    
+    // Configurar gestos táctiles
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    modal.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+            nextShort(); // Swipe izquierda
+        }
+        if (touchEndX > touchStartX + 50) {
+            prevShort(); // Swipe derecha
+        }
+    }
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
 }

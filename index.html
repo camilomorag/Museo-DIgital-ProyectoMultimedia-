@@ -94,30 +94,42 @@
         </section>
         
         <!-- Línea de tiempo interactiva -->
-        <section id="timeline" class="timeline-section">
-            <h2 class="section-title rainbow-text">⏳ LÍNEA DEL TIEMPO DIGITAL</h2>
-              <!-- Botones de categoría -->
-  <div class="category-selector">
-    <button class="retro-btn category-btn active" data-category="all">🌐 Todo</button>
-    <button class="retro-btn category-btn" data-category="web-design">🎨 Diseño Web</button>
-    <button class="retro-btn category-btn" data-category="multimedia">📽️ Multimedia</button>
-    <button class="retro-btn category-btn" data-category="culture">👾 Cultura Digital</button>
-    <button class="retro-btn category-btn" data-category="transition">🔁 Web 1.0 → 2.0</button>
-    <button class="retro-btn category-btn" data-category="preservation">🗂️ Preservación</button>
-  </div>
-            <div class="decade-selector">
-                <button class="retro-btn" data-decade="1990">1990s</button>
-                <button class="retro-btn" data-decade="2000">2000s</button>
-                <button class="retro-btn" data-decade="2010">2010s</button>
-            </div>
-            
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-                <div id="timeline-items" class="timeline-items">
-                    <!-- Los elementos se cargarán dinámicamente con JS -->
-                </div>
-            </div>
-        </section>
+      <!-- En la sección de timeline -->
+<section id="timeline" class="timeline-section">
+    <h2 class="section-title rainbow-text">⏳ LÍNEA DEL TIEMPO DIGITAL</h2>
+    
+    <!-- Selector de período -->
+    <div class="period-selector">
+        <button class="retro-btn active" data-period="all">Todas las épocas</button>
+        <button class="retro-btn" data-period="1991-2011">1991-2011</button>
+        <button class="retro-btn" data-period="2011-2020">2011-2020</button>
+        <button class="retro-btn" data-period="2020-2025">2020-2025</button>
+    </div>
+    
+    <!-- Selector de categoría -->
+    <div class="category-selector">
+        <button class="retro-btn category-btn active" data-category="all">🌐 Todo</button>
+        <button class="retro-btn category-btn" data-category="web-design">🎨 Diseño Web</button>
+        <button class="retro-btn category-btn" data-category="multimedia">📽️ Multimedia</button>
+        <button class="retro-btn category-btn" data-category="culture">👾 Cultura Digital</button>
+        <button class="retro-btn category-btn" data-category="transition">🔁 Web 1.0 → 2.0</button>
+    </div>
+    
+    <!-- Selector de década -->
+    <div class="decade-selector">
+        <button class="retro-btn" data-decade="1990">1990s</button>
+        <button class="retro-btn" data-decade="2000">2000s</button>
+        <button class="retro-btn" data-decade="2010">2010s</button>
+        <button class="retro-btn" data-decade="2020">2020s</button>
+    </div>
+    
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div id="timeline-items" class="timeline-items">
+            <!-- Los elementos se cargarán dinámicamente con JS -->
+        </div>
+    </div>
+</section>
         
         <!-- Exposiciones por temas -->
         <section id="exhibits" class="exhibits-section">
@@ -177,10 +189,13 @@
                         </div>
                     <!-- Cambia esto en tu HTML -->
 <div class="exhibit-item">
-    <img src="assets/images/midi.png" alt="MIDI" class="pixel-border">
-    <h4>Música Retro</h4>
-    <p>Las melodías que acompañaban muchos sitios web.</p>
-    <button class="retro-btn" onclick="showAudioPlayer()">Reproducir Muestras</button>
+    <img src="assets/covers/multimedia.jpg" alt="Multimedia" class="pixel-border">
+    <h4>Multimedia Retro</h4>
+    <p>Explora videos, música y shorts de la era dorada de Internet.</p>
+    <div class="media-options">
+        <button class="retro-btn" onclick="showAudioPlayer()">🎵 Multimedia</button>
+        <button class="retro-btn" onclick="showShortsPlayer()">🎥 Shorts</button>
+    </div>
 </div>
                         <div class="exhibit-item">
                             <img src="assets/images/flash.jpg" alt="Flash" class="pixel-border">
